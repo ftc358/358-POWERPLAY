@@ -35,11 +35,13 @@ import static org.firstinspires.ftc.robotcore.external.navigation.AxesOrder.YZX;
 import static org.firstinspires.ftc.robotcore.external.navigation.AxesReference.EXTRINSIC;
 import static org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection.BACK;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
@@ -73,9 +75,9 @@ import java.util.List;
  * is explained below.
  */
 
-@TeleOp(name="Vuforia Field Nav", group ="Concept")
-@Disabled
+@Autonomous(name="Vuforia Field Nav", group ="Concept")
 public class TestingVuforiaFieldNavigation extends LinearOpMode {
+    MyHardware robot =new MyHardware(); // TODO
 
     // IMPORTANT:  For Phone Camera, set 1) the camera source and 2) the orientation, based on how your phone is mounted:
     // 1) Camera Source.  Valid choices are:  BACK (behind screen) or FRONT (selfie side)
@@ -117,14 +119,21 @@ public class TestingVuforiaFieldNavigation extends LinearOpMode {
     private float phoneZRotate    = 0;
 
     @Override public void runOpMode() {
+
+        robot.init(hardwareMap);
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          * To get an on-phone camera preview, use the code below.
          * If no camera preview is desired, use the parameter-less constructor instead (commented out below).
          */
+
+        /*
+        Retrieve the camera we are to use
+        */
+        Object webcamName = hardwareMap.get(WebcamName.class, "Webcame 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
-        // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+        //uforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection   = CAMERA_CHOICE;
@@ -216,7 +225,7 @@ public class TestingVuforiaFieldNavigation extends LinearOpMode {
          * To restore the normal opmode structure, just un-comment the following line:
          */
 
-        // waitForStart();
+        waitForStart();
 
         /* Note: To use the remote camera preview:
          * AFTER you hit Init on the Driver Station, use the "options menu" to select "Camera Stream"
