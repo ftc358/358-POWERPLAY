@@ -96,8 +96,7 @@ public class TestingVuforiaFieldNavigation extends LinearOpMode {
      * Once you've obtained a license key, copy the string from the Vuforia web site
      * and paste it in to your code on the next line, between the double quotes.
      */
-    private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+    private static final String VUFORIA_KEY = "AX9Ef4T/////AAABmQ1E33Il6kCLgNHGUvIh1NUUcMgzpEU8XdP0cehzmSUTSjI3hmhSUbDqfUjP/2aA1Z7COoovNSxTBerLRCENWTSi8s8hbE7nVLldf8AZzpDymPGjs3SrlyCVood8TBIXdBkbP+u7tiYn30Sw7Iw9dHGk4I1imXgQjlOxOzZCsFv8JS2FVRaG8o9yhTOeyR4TNYKJmOOAwknEyU9j1EpZTa27wO3FdZexyyQTg0m+Cn1JJVC99FnLO9OjeLYQ5IMjrDJTrdSPn68T4YzTw776Zq3mwFgIwMl1FFLVkVORCneNdVfLEcRa5pzB6CILofXXX/rhjLjBKP1fCCKttYdhRu9hwQhgam/036uiC1/dRhiI";
 
     // Since ImageTarget trackables use mm to specifiy their dimensions, we must use mm for all the physical dimension.
     // We will define some constants and conversions here.  These are useful for the FTC competition field.
