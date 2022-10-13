@@ -77,7 +77,7 @@ import java.util.List;
 
 @Autonomous(name="Vuforia Field Nav", group ="Concept")
 public class TestingVuforiaFieldNavigation extends LinearOpMode {
-    MyHardware robot =new MyHardware(); // TODO
+  //  MyHardware robot =new MyHardware(); // TODO
 
     // IMPORTANT:  For Phone Camera, set 1) the camera source and 2) the orientation, based on how your phone is mounted:
     // 1) Camera Source.  Valid choices are:  BACK (behind screen) or FRONT (selfie side)
@@ -120,7 +120,7 @@ public class TestingVuforiaFieldNavigation extends LinearOpMode {
 
     @Override public void runOpMode() {
 
-        robot.init(hardwareMap);
+//        robot.init(hardwareMap);
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          * To get an on-phone camera preview, use the code below.
@@ -130,7 +130,7 @@ public class TestingVuforiaFieldNavigation extends LinearOpMode {
         /*
         Retrieve the camera we are to use
         */
-        Object webcamName = hardwareMap.get(WebcamName.class, "Webcame 1");
+        Object webcamName = hardwareMap.get(WebcamName.class, "Webcame 1");//TODO, find out the camera name
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
         //uforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();

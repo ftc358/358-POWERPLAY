@@ -126,11 +126,11 @@ public class xdrive extends LinearOpMode {
 //                double motor1power = (y - x + rx) / denominator;
 //                double motor3power = (y - x - rx) / denominator;
 //                double motor2power = (y + x - rx) / denominator;
-                if (gamepad1.)
-                motor0.setPower(1);
-                motor1.setPower(1);
-                motor3.setPower(1);
-                motor2.setPower(1);
+//                if (gamepad1.)
+//                motor0.setPower(1);
+//                motor1.setPower(1);
+//                motor3.setPower(1);
+//                motor2.setPower(1);
             }
         }
     }
