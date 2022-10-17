@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 
 @TeleOp
 
-public class rita_Mecanum extends LinearOpMode{
+public class rita_Mecanum extends LinearOpMode {
     protected DcMotor motor1;
     protected DcMotor motor2;
     protected DcMotor motor3;
@@ -46,10 +46,8 @@ public class rita_Mecanum extends LinearOpMode{
         motor1.setDirection(DcMotorSimple.Direction.REVERSE);
         motor2.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        }
-
-
     }
+
 }
 
 
