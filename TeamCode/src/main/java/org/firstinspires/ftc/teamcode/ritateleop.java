@@ -8,29 +8,28 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 
 
-@TeleOp
+@TeleOp(name="TeleOp")
 
 public class ritateleop extends LinearOpMode{
-    protected DcMotor motor1;
-    protected DcMotor motor2;
-    protected DcMotor motor3;
-    protected DcMotor motor4;
+    protected DcMotor lf;
+    protected DcMotor lb;
+    protected DcMotor rf;
+    protected DcMotor rb;
 
     public void runOpMode() throws InterruptedException {
         //initializing motors
-        motor1=hardwareMap.dcMotor.get("motor1");
-        motor2=hardwareMap.dcMotor.get("motor2");
-        motor3=hardwareMap.dcMotor.get("motor3");
-        motor4=hardwareMap.dcMotor.get("motor4");
+        lf=hardwareMap.dcMotor.get("lf");
+        lb=hardwareMap.dcMotor.get("lb");
+        rf=hardwareMap.dcMotor.get("rf");
+        rb=hardwareMap.dcMotor.get("rb");
 
         waitForStart();
 
-
         while (opModeIsActive()) {
-            motor1.setPower(gamepad1.left_stick_y);
-            motor3.setPower(gamepad1.left_stick_y);
-            motor2.setPower(-gamepad1.left_stick_y);
-            motor4.setPower(-gamepad1.left_stick_y);
+            lf.setPower(gamepad1.left_stick_y);
+            lb.setPower(-gamepad1.left_stick_y);
+            rf.setPower(gamepad1.left_stick_y);
+            rb.setPower(-gamepad1.left_stick_y);
         }
 
 
