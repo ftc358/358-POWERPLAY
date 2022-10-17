@@ -51,16 +51,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  *
  */
 
-public class Hardware {
+public class Hardware358 {
 
     /* Declare OpMode members. */
     private LinearOpMode myOpMode = null;   // gain access to methods in the calling OpMode.
 
     // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
-    private DcMotor lf = null; // left front
-    private DcMotor rf = null; // right front
-    private DcMotor rb = null; // right back
-    private DcMotor lb = null; // left back
+    public DcMotor lf = null; // left front
+    public DcMotor rf = null; // right front
+    public DcMotor rb = null; // right back
+    public DcMotor lb = null; // left back
 //    private DcMotor leftDrive   = null;
 //    private DcMotor rightDrive  = null;
 //    private DcMotor armMotor = null;
