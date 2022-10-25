@@ -81,7 +81,7 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
     // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
-    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -131,10 +131,9 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  15,  15, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        // todo: 53 in. 3 sec.
-//        encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-//        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  20,  20, 50.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderTurn(TURN_SPEED,   12, 12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED, 40, 40, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -217,4 +216,71 @@ public class RobotAutoDriveByEncoder_Linear extends LinearOpMode {
             sleep(250);   // optional pause after each move.
         }
     }
-}
+    public void encoderTurn(double speed,
+                             double leftInches, double rightInches,
+                             double timeoutS) {
+       // int newmotor1Target;
+       // int newmotor2Target;
+        int newmotor3Target;
+        int newmotor4Target;
+
+        // Ensure that the opmode is still active
+        if (opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+//            newmotor1Target = lf.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+//            newmotor2Target = lb.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newmotor3Target = rf.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+            newmotor4Target = rb.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
+//            lf.setTargetPosition(newmotor1Target);
+//            lb.setTargetPosition(newmotor2Target);
+            rf.setTargetPosition(newmotor3Target);
+            rb.setTargetPosition(newmotor4Target);
+
+            // Turn On RUN_TO_POSITION
+//            lf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            lb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rf.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            rb.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            lf.setPower(0);
+            lb.setPower(0);
+            rf.setPower(Math.abs(speed));
+            rb.setPower(Math.abs(speed));
+
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
+            // its target position, the motion will stop.  This is "safer" in the event that the robot will
+            // always end the motion as soon as possible.
+            // However, if you require that BOTH motors have finished their moves before the robot continues
+            // onto the next step, use (isBusy() || isBusy()) in the loop test.
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    ( rf.isBusy() && rb.isBusy())) {
+
+                // Display it for the driver.
+                telemetry.addData("Running to",  " %7d :%7d", newmotor3Target, newmotor4Target);
+                telemetry.addData("Currently at",  " at %7d :%7d",
+                        lf.getCurrentPosition(), lb.getCurrentPosition(), rf.getCurrentPosition(), rb.getCurrentPosition());
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            lf.setPower(0);
+            lb.setPower(0);
+            rf.setPower(0);
+            rb.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            sleep(250);   // optional pause after each move.
+        }
+}}
