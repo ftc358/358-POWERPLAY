@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 /**
  * This file works in conjunction with the External Hardware Class sample called: ConceptExternalHardwareClass.java
@@ -74,8 +75,8 @@ public class Hardware358 {
 //    public static final double ARM_DOWN_POWER  = -0.45 ;
 
     // Define a constructor that allows the OpMode to pass a reference to itself.
-    public Hardware358(LinearOpMode opmode) {
-        myOpMode = opmode;
+    public Hardware358() {
+       // myOpMode = opmode;
     }
 
     /**
@@ -84,15 +85,15 @@ public class Hardware358 {
      *
      * All of the hardware devices are accessed via the hardware map, and initialized.
      */
-    public void init()    {
+    public void init(HardwareMap hwMap)    {
         // Define and Initialize Motors (note: need to use reference to actual OpMode).
 //        leftDrive  = myOpMode.hardwareMap.get(DcMotor.class, "left_drive");
 //        rightDrive = myOpMode.hardwareMap.get(DcMotor.class, "right_drive");
 //        armMotor   = myOpMode.hardwareMap.get(DcMotor.class, "arm");
-        lf  = myOpMode.hardwareMap.get(DcMotor.class, "lf");
-        rf  = myOpMode.hardwareMap.get(DcMotor.class, "rf");
-        rb  = myOpMode.hardwareMap.get(DcMotor.class, "rb");
-        lb  = myOpMode.hardwareMap.get(DcMotor.class, "lb");
+        lf  = hwMap.get(DcMotor.class, "lf");
+        rf  = hwMap.get(DcMotor.class, "rf");
+        rb  = hwMap.get(DcMotor.class, "rb");
+        lb  = hwMap.get(DcMotor.class, "lb");
 
 //        // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
 //        // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
